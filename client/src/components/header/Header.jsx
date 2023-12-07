@@ -1,16 +1,18 @@
+import styles from './Header.module.css';
+
 export default function Header() {
 
     return (
-        <>
-        <div className="log">Logo!!!!</div>
-        <nav>
-            <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Machines</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Contact</a></li>
-            </ul>
+        <header className={styles.header}>
+        <nav className={styles.navbar}>
+          <div className={styles.logo}>Logo</div>
+          <ul className={styles.navList}>
+            <li className={styles.navItem}>Home</li>
+            <li className={styles.navItem}>About</li>
+            <li className={styles.navItem}>Machines</li>
+            <li className={styles.navItem}>Contact</li>
+          </ul>
         </nav>
-        </>
+      </header>
     );
 }

@@ -1,0 +1,33 @@
+.header {
+    background-color: orange;
+    color: white;
+    padding: 0.5rem;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .navList {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .navItem {
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    &:hover {
+      background-color: blue;
+    }
+  }

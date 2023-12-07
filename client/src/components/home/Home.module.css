@@ -1,0 +1,36 @@
+.hero {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-image: url('https://www.liebherr.com/shared/media/construction-machinery/tower-cranes/images/mobile-construction-cranes/mk-campaign/liebherr-mk140-big-one.jpg');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 102, 0);
+    text-align: center;
+    text-shadow: 0.3rem 0.3rem 0.5rem #000000;
+    font-weight: 900;
+}
+
+.heroContent {
+    display: flex;
+    flex-direction: column;
+    max-width: 60rem;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.heroContent h1 {
+    padding: 0 1em;
+    font-size: 2rem;
+    background-color: #0000007a;
+    border-radius: 3rem 1rem 3rem 1rem;
+}
+
+.heroContent p {
+    max-width: 50rem;
+    padding: 0 1em;
+    font-size: 1.6rem;
+    background-color: #0000007a;
+    border-radius: 3rem 1rem 3rem 1rem;
+}
