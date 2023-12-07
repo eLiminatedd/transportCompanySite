@@ -1,28 +1,14 @@
-export default function Home() {
+import styles from './Home.module.css';
+
+const Home = () => {
   return (
-    <>
-      <div className="hero">
-        <article>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus
-            quae dolor natus officia facere. Maiores magnam quos necessitatibus
-            earum exercitationem libero, facilis, consectetur reiciendis quaerat
-            suscipit quibusdam voluptas iste assumenda.
-          </p>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus
-            quae dolor natus officia facere. Maiores magnam quos necessitatibus
-            earum exercitationem libero, facilis, consectetur reiciendis quaerat
-            suscipit quibusdam voluptas iste assumenda.
-          </p>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus
-            quae dolor natus officia facere. Maiores magnam quos necessitatibus
-            earum exercitationem libero, facilis, consectetur reiciendis quaerat
-            suscipit quibusdam voluptas iste assumenda.
-          </p>
-        </article>
+    <div className={styles.hero} >
+      <div className={styles.heroContent}>
+        <h1>Something heavy needs lifting</h1>
+        <p>Look no further Call us now !!!</p>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default Home;
