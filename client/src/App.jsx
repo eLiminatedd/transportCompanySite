@@ -10,7 +10,9 @@ import Contact from './components/contact/Contact';
 import Equipment from './components/equipment/Equipment';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
+
 import OrderPage from './components/order/OrderPage';
+
 
 
 
