@@ -10,7 +10,9 @@ import Contact from './components/contact/Contact';
 import Equipment from './components/equipment/Equipment';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
-import Dashboard from './components/dashboard/Dashboard';
+
+import OrderPage from './components/order/OrderPage';
+
 
 
 
@@ -24,7 +26,7 @@ function App() {
     <Equipment />
     <Login />
     <Register />
-    <Dashboard />
+    <OrderPage />
     <Footer />
     </>
   );
