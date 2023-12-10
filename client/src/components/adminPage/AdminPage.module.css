@@ -1,0 +1,42 @@
+.adminPage {
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.pageContainer {
+    display: flex;
+    flex-direction: row;
+    /* Change to column layout on smaller screens */
+    gap: 2rem;
+}
+
+.machineFormContainer {
+    flex: 1;
+}
+
+.ordersContainer,
+.testimonialsContainer {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+
+/* Add more styles as needed */
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .pageContainer {
+        gap: 1rem;
+    }
+
+    .machineFormContainer {
+        order: 2;
+        /* Change order to display form below description on smaller screens */
+    }
+
+    .ordersContainer,
+    .testimonialsContainer {
+        margin-top: 1rem;
+    }
+}
+
