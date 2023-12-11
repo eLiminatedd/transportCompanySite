@@ -30,6 +30,8 @@ export class UsersController {
   @HttpCode(HttpStatus.CREATED)
   async register(@Body() dto: registerUserDto) {
     try {
+      console.log(dto);
+      
       return this.usersService.register(dto);
     } catch (error) {
       throw error

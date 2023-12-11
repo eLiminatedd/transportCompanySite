@@ -1,6 +1,4 @@
-
 import './App.css';
-
 
 import Home from './components/home/Home';
 import Header from './components/header/Header';
@@ -14,38 +12,27 @@ import Register from './components/register/Register';
 import OrderPage from './components/order/OrderPage';
 import AdminPage from './components/adminPage/AdminPage';
 
-
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <>
-    <Header />
-    <Home />
-    <About />
-    <Contact />
-    <Equipment />
-    <Login />
-    <Register />
-    <OrderPage />
-    <AdminPage />
-    <Footer />
-    </>
+    <BrowserRouter>
+      <div className="cont">
+        <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/equipment" element={<Equipment />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/orders" element={<OrderPage />} />
+            <Route path="/admin-panel" element={<AdminPage />} />
+          </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }
 
 export default App;
-
-/*  TODO:
-- Components
-4. Machines
-5. Login
-6. Register
-
-- Add logo
-
-
-
-
-- Make sure its responsive
-*/
