@@ -1,4 +1,5 @@
 import styles from './Header.module.css';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
 
@@ -6,12 +7,17 @@ export default function Header() {
         <header className={styles.header}>
         <nav className={styles.navbar}>
           <div className={styles.logo}>Logo</div>
-          <ul className={styles.navList}>
-            <li className={styles.navItem}>Home</li>
-            <li className={styles.navItem}>About</li>
-            <li className={styles.navItem}>Machines</li>
-            <li className={styles.navItem}>Contact</li>
-          </ul>
+          <div className={styles.navList}>
+            <Link to="/" className={styles.navItem}>Home</Link>
+            <Link to="/about" className={styles.navItem}>About</Link>
+            <Link to="/equipment" className={styles.navItem}>Machines</Link>
+            <Link to="/contact" className={styles.navItem}>Contact</Link>
+            <Link to="/login" className={styles.navItem}>Login</Link>
+            <Link to="/register" className={styles.navItem}>Register</Link>
+            <Link to="/orders" className={styles.navItem}>Submit an Order</Link>
+            <Link to="/admin-panel" className={styles.navItem}>Admin Panel</Link>
+            <button className={styles.navItem}>Logout</button>
+          </div>
         </nav>
       </header>
     );
