@@ -2,7 +2,6 @@ import './App.css';
 import { AuthProvider } from './context/AuthContext';
 
 
-
 import Home from './components/home/Home';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
@@ -13,6 +12,7 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 import OrderPage from './components/order/OrderPage';
 import AdminPage from './components/adminPage/AdminPage';
+
 
 import { Routes, Route } from 'react-router-dom';
 
