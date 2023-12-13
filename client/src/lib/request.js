@@ -9,7 +9,8 @@ const buildOptions = (data, url) => {
     }
 
     console.log(options.body);
-    const tokens = localStorage.getItem('accessToken'); // prolly some other name when setting
+    const tokens = JSON.parse(localStorage.getItem('auth')); // prolly some other name when setting
+    console.log(tokens);
     if (tokens) {
         // if (url.endsWith('/refresh')) set refresh token esle do bellow
         if (url.endsWith('/refresh')) {
