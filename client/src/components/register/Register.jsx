@@ -1,13 +1,16 @@
 import styles from './Register.module.css';
+import { register } from '../../services/AuthService';
+
+import { useState } from 'react';
 
 import { useContext} from 'react';
 import AuthContext from '../../context/AuthContext';
 import useForm from '../../hooks/useForm';
 
 const Register = () => {
-
   const {registerSubmitHandler} = useContext(AuthContext);
   const {values, onChange, onSubmit} = useForm(registerSubmitHandler, {
+
     username: '',
     email: '',
     password: '',
@@ -19,11 +22,13 @@ const Register = () => {
   });
 
 
+
   return (
     <div className={styles.register}>
       <h2 className={styles.heading}>Register</h2>
       <div className={styles.formContainer}>
         <form onSubmit={onSubmit} className={styles.registerForm}>
+
           <div className="twofieldsbox">
             <div className={styles.formGroup}>
               <label htmlFor="username">Username</label>
@@ -33,6 +38,7 @@ const Register = () => {
                 name="username"
                 value={values.username}
                 onChange={onChange}
+
                 autoComplete="Username"
                 required
               />
@@ -45,6 +51,7 @@ const Register = () => {
                 name="email"
                 value={values.email}
                 onChange={onChange}
+
                 autoComplete="email"
                 required
               />
@@ -60,6 +67,7 @@ const Register = () => {
                 name="password"
                 value={values.password}
                 onChange={onChange}
+
                 autoComplete="new-password"
                 required
               />
@@ -72,6 +80,7 @@ const Register = () => {
                 name="confirmPassword"
                 value={values.confirmPassword}
                 onChange={onChange}
+
                 autoComplete="new-password"
                 required
               />
@@ -88,6 +97,7 @@ const Register = () => {
                 // pattern="[0-9]{10}" 
                 value={values.phone}
                 onChange={onChange}
+
                 autoComplete="tel"
               />
             </div>
@@ -99,6 +109,7 @@ const Register = () => {
                 name="companyName"
                 value={values.companyName}
                 onChange={onChange}
+
                 autoComplete="organization"
               />
             </div>
@@ -113,6 +124,7 @@ const Register = () => {
                 name="firstName"
                 value={values.firstName}
                 onChange={onChange}
+
                 autoComplete="given-name"
               />
             </div>
@@ -124,6 +136,7 @@ const Register = () => {
                 name="lastName"
                 value={values.lastName}
                 onChange={onChange}
+
                 autoComplete="family-name"
               />
             </div>
@@ -141,20 +154,3 @@ const Register = () => {
 };
 
 export default Register;
-
-
-
-  // const onChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData) => ({ ...prevData, [name]: value }));
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   console.log('Form submitted:', formData);
-  //   // Handle form submission logic here
-  //   const { email, username, password, phone, companyName, firstName, lastName } = formData;
-  //   //find a way to validate inputs
-  //   const resp = await register(email, username, password, phone, companyName, firstName, lastName);
-  //   console.log(resp);
-  // };
