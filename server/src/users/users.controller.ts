@@ -53,6 +53,8 @@ export class UsersController {
   @HttpCode(HttpStatus.OK)
   async logout(@GetCurrentUserId() userId: mongoose.Types.ObjectId) {
     try {
+      console.log('logged out >>>>' + userId);
+      
       return this.usersService.logout(userId);
     } catch (error) {
       throw error
