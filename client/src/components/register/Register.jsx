@@ -3,8 +3,14 @@ import { register } from '../../services/AuthService';
 
 import { useState } from 'react';
 
+import { useContext} from 'react';
+import AuthContext from '../../context/AuthContext';
+import useForm from '../../hooks/useForm';
+
 const Register = () => {
-  const [formData, setFormData] = useState({
+  const {registerSubmitHandler} = useContext(AuthContext);
+  const {values, onChange, onSubmit} = useForm(registerSubmitHandler, {
+
     username: '',
     email: '',
     password: '',
@@ -15,26 +21,14 @@ const Register = () => {
     lastName: '',
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission logic here
-    const { email, username, password, phone, companyName, firstName, lastName } = formData;
-    //find a way to validate inputs
-    const resp = await register(email, username, password, phone, companyName, firstName, lastName);
-    console.log(resp);
-  };
 
   return (
     <div className={styles.register}>
       <h2 className={styles.heading}>Register</h2>
       <div className={styles.formContainer}>
-        <form onSubmit={handleSubmit} className={styles.registerForm}>
+        <form onSubmit={onSubmit} className={styles.registerForm}>
+
           <div className="twofieldsbox">
             <div className={styles.formGroup}>
               <label htmlFor="username">Username</label>
@@ -42,8 +36,9 @@ const Register = () => {
                 type="text"
                 id="username"
                 name="username"
-                value={formData.username}
-                onChange={handleChange}
+                value={values.username}
+                onChange={onChange}
+
                 autoComplete="Username"
                 required
               />
@@ -54,8 +49,9 @@ const Register = () => {
                 type="email"
                 id="email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
+                value={values.email}
+                onChange={onChange}
+
                 autoComplete="email"
                 required
               />
@@ -69,8 +65,9 @@ const Register = () => {
                 type="password"
                 id="password"
                 name="password"
-                value={formData.password}
-                onChange={handleChange}
+                value={values.password}
+                onChange={onChange}
+
                 autoComplete="new-password"
                 required
               />
@@ -81,8 +78,9 @@ const Register = () => {
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
+                value={values.confirmPassword}
+                onChange={onChange}
+
                 autoComplete="new-password"
                 required
               />
@@ -97,8 +95,9 @@ const Register = () => {
                 id="phone"
                 name="phone"
                 // pattern="[0-9]{10}" 
-                value={formData.phone}
-                onChange={handleChange}
+                value={values.phone}
+                onChange={onChange}
+
                 autoComplete="tel"
               />
             </div>
@@ -108,8 +107,9 @@ const Register = () => {
                 type="text"
                 id="companyName"
                 name="companyName"
-                value={formData.companyName}
-                onChange={handleChange}
+                value={values.companyName}
+                onChange={onChange}
+
                 autoComplete="organization"
               />
             </div>
@@ -122,8 +122,9 @@ const Register = () => {
                 type="text"
                 id="firstName"
                 name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
+                value={values.firstName}
+                onChange={onChange}
+
                 autoComplete="given-name"
               />
             </div>
@@ -133,8 +134,9 @@ const Register = () => {
                 type="text"
                 id="lastName"
                 name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
+                value={values.lastName}
+                onChange={onChange}
+
                 autoComplete="family-name"
               />
             </div>
