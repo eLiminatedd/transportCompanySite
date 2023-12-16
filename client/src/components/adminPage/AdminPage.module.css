@@ -10,14 +10,12 @@
     gap: 2rem;
 }
 
-.machineFormContainer {
-    flex: 1;
-}
-
 .ordersContainer,
 .testimonialsContainer {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     margin-top: 2rem;
 }
 

@@ -1,4 +1,9 @@
+const baseUrl = 'http://localhost:3500/';
+
+
 const buildOptions = (data, url) => {
+
+
     const options = {};
 
     if (data) {
@@ -29,31 +34,46 @@ const buildOptions = (data, url) => {
     return options;
 };
 
-const request = async (method, url, data) => {
-    const response = await fetch(url, {
-        ...buildOptions(data, url),
-        method,
-    });
+const request = async (method, urlExtension, data) => {
 
-    if (response.status === 204) {
-        return {};
+    try {
+        const response = await fetch(`${baseUrl}${urlExtension}`, {
+            ...buildOptions(data, `${baseUrl}${urlExtension}`),
+            method,
+        });
+
+        console.log(response);
+
+        if (response.status === 204) {
+            return {};
+        }
+
+        if (response.status === 401) {
+            console.log('401 response from client       ', response);
+            const refreshTokens = await fetch(`${baseUrl}users/refresh`, { ...buildOptions({}, `${baseUrl}users/refresh`), method: 'POST' });
+            if (refreshTokens.status === 401) {
+                localStorage.removeItem('auth');
+                throw new Error('Both tokens are invalid please relog');
+                // check again if its working after other services are added
+            }
+            const newTokens = await refreshTokens.json();
+            localStorage.removeItem('auth');
+            localStorage.setItem('auth', JSON.stringify(newTokens));
+            request(method, urlExtension, data);
+        }
+
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw result;
+        }
+
+        return result;
+    } catch (error) {
+        console.log(error);
     }
-    /*
-    if response status 401 error
-        refresh access token with reset token
-    if response status 422 
-        clean tokens 
-        logout user 
-        redirect to login 
-    */
 
-    const result = await response.json();
-
-    if (!response.ok) {
-        throw result;
-    }
-
-    return result;
 };
 
 export const get = request.bind(null, 'GET');

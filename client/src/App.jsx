@@ -12,6 +12,7 @@ import Login from './components/login/Login';
 import Register from './components/register/Register';
 import OrderPage from './components/order/OrderPage';
 import AdminPage from './components/adminPage/AdminPage';
+import MachineDetails from './components/machineDetails/MachineDetails';
 
 
 import { Routes, Route } from 'react-router-dom';
@@ -26,6 +27,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/equipment" element={<Equipment />} />
+        <Route path="/equipment/:machineId" element={<MachineDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/orders" element={<OrderPage />} />
