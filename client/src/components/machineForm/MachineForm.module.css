@@ -1,0 +1,39 @@
+
+.machineFormContainer {
+    flex: 1 1 50%;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center
+}
+
+.machineForm {
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+.machineForm > button {
+    min-width: 20rem;
+    font-size: 1.4rem;
+}
+
+.inputBox {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+.inputBox > input {
+    min-width: 16.5rem;
+    min-height: 1.5rem;
+}
+
+.txtArea {
+    resize: none;
+    min-width: 35rem;
+    min-height: 7rem;
+}

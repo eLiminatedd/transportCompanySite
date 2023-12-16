@@ -1,8 +1,9 @@
 import { createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import * as authService from '../services/AuthService';
+import * as authService from '../services/authService';
 import usePersistedState from '../hooks/usePersistedState';
+import useCatchError from '../hooks/useCatchError';
 
 const AuthContext = createContext();
 
@@ -10,15 +11,19 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [auth, setAuth] = usePersistedState('auth', {});
+  const [error, setError] = useCatchError('');
 
   const loginSubmitHandler = async (values) => {
-    const result = await authService.login(values.email, values.password);
+      const result = await authService.login(values.email, values.password);
+      setAuth(result);
+      navigate('/');
+      
+      // const errorHandler = setError(respError);
+      // errorHandler();
 
-    setAuth(result);
 
     // localStorage.setItem('accessToken', result.accessToken);
 
-    navigate('/');
   };
 
   const registerSubmitHandler = async (values) => {
@@ -40,17 +45,25 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logoutHandler = async () => {
-    await authService.logout();
-    setAuth({});
+      await authService.logout();
+      setAuth({});
+      localStorage.removeItem('auth');
+  };
+
+  const resetHandler = async (newTokens) => {
     localStorage.removeItem('auth');
+    setAuth(newTokens);
   };
 
   const values = {
     loginSubmitHandler,
     registerSubmitHandler,
     logoutHandler,
+    resetHandler,
     role: auth.role,
     isAuthenticated: !!auth.access_token,
+    error,
+    setError,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

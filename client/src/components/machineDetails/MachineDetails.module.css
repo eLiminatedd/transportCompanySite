@@ -1,0 +1,51 @@
+.machineDetailsContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.machineDetailsContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.machineImage {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.modalCont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    /* margin: 5rem auto; */
+}
+
+.formBox {
+    max-width: 40rem;
+}
+
+.closeButton {
+    font-size: 1.5rem;
+    min-width: 20rem
+}
+
+
+
+@media (min-width: 768px) {
+    .machineDetailsContent {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .machineImage {
+        margin-bottom: 0;
+    }
+}

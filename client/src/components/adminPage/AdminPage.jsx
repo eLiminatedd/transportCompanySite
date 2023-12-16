@@ -1,55 +1,42 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import * as contractsService from '../../services/contractsService';
 
-
+import MachineForm from '../machineForm/MachineForm';
 import Modal from 'react-modal';
 import OrderCard from '../order/OrderCard';
 import styles from './AdminPage.module.css';
-
 
 Modal.setAppElement('#root');
 
 const AdminPage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [additionalAttribute, setAdditionalAttribute] = useState('');
-  const [machineFormData, setMachineFormData] = useState({
-    // Machine creation form data
-    machineName: '',
-    // Add more fields as needed
-  });
-  const [orders, setOrders] = useState([
-    // Sample orders, similar to the OrderPage
-   { productName: 'as',
-    quantity: '2',
-    customerName: '443',
-    shippingAddress: '232',
-    orderDate: '2222',
-    status: 'ongoing', },
-    { productName: 'aadsss',
-    quantity: '1',
-    customerName: '443',
-    shippingAddress: '232',
-    orderDate: '22',
-    status: 'ongoing', },
-    { productName: 'ff',
-    quantity: '23',
-    customerName: '4432',
-    shippingAddress: '232',
-    orderDate: '22232',
-    status: 'ongoing', }
 
-  ]);
+  const [orders, setOrders] = useState([]);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
 
-  const handleMachineFormChange = (e) => {
-    const { name, value } = e.target;
-    setMachineFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
   const handleAdditionalAttributeChange = (e) => {
     setAdditionalAttribute(e.target.value);
   };
+
+  const refreshState = useCallback(() => {
+    // change it to getCurrentContracts Later
+    contractsService
+      .getContracts()
+      .then((result) => {
+        console.log(result);
+        setOrders(result);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    refreshState();
+  }, [refreshState]);
 
   const handleAddAttribute = () => {
     // Handle adding the additional attribute to the orders
@@ -73,27 +60,22 @@ const AdminPage = () => {
     );
   };
 
+  const initData = {
+    machineName: '',
+    img: '',
+    attrOne: '',
+    attrTwo: '',
+    attrThree: '',
+    attrFour: '',
+    attrFive: '',
+    attrSix: '',
+    description: '',
+  };
+
   return (
     <div className={styles.adminPage}>
       <div className={styles.pageContainer}>
-        {/* Machine Creation Form Container */}
-        <div className={styles.machineFormContainer}>
-          <h2>Create Machine</h2>
-          <form>
-            <label>
-              Machine Name:
-              <input
-                type="text"
-                name="machineName"
-                value={machineFormData.machineName}
-                onChange={handleMachineFormChange}
-                required
-              />
-            </label>
-            {/* Add more fields as needed */}
-            <button type="submit">Create Machine</button>
-          </form>
-        </div>
+        <MachineForm id={null} initData={initData} />
 
         {/* Description Container */}
         <div>
@@ -107,14 +89,17 @@ const AdminPage = () => {
 
       {/* Orders Container */}
       <hr />
-        <h2>Manage Orders</h2>
-          <button onClick={openModal}>Add Additional Attribute</button>
+      <h2>Manage Orders</h2>
+      <button onClick={openModal}>Add Additional Attribute</button>
       <div className={styles.ordersContainer}>
-        {orders.map((order, index) => (
+        {orders.map((order) => (
           <OrderCard
-            key={index}
+            callback={refreshState}
+            key={order._id}
             order={order}
-            onStatusChange={(newStatus) => handleStatusChange(order.id, newStatus)}
+            onStatusChange={(newStatus) =>
+              handleStatusChange(order.id, newStatus)
+            }
           />
         ))}
 
@@ -138,14 +123,16 @@ const AdminPage = () => {
         </Modal>
       </div>
 
-<hr />
+      <hr />
       {/* Testimonials Container */}
-        <h2>Testimonials</h2>
+      <h2>Testimonials</h2>
       <div className={styles.testimonialsContainer}>
         {/* Testimonial cards go here */}
         <div className={styles.testimonialCard}>
-          <p>Great service! The machines were delivered on time and in perfect
-            condition.</p>
+          <p>
+            Great service! The machines were delivered on time and in perfect
+            condition.
+          </p>
           <p>- John Doe</p>
         </div>
       </div>

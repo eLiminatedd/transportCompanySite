@@ -1,7 +1,5 @@
 import styles from './Register.module.css';
-import { register } from '../../services/AuthService';
 
-import { useState } from 'react';
 
 import { useContext} from 'react';
 import AuthContext from '../../context/AuthContext';
