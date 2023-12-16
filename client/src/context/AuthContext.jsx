@@ -51,6 +51,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const resetHandler = async (newTokens) => {
+
     localStorage.removeItem('auth');
     setAuth(newTokens);
   };
