@@ -1,18 +1,19 @@
 import { useCallback, useEffect, useState } from 'react';
 import * as contractsService from '../../services/contractsService';
-
+import dateFunc from '../../lib/dateFormater';
 import Modal from 'react-modal';
-import OrderCard from './OrderCard';
+import OrderCard from '../orderCard/OrderCard';
 import styles from './OrderPage.module.css';
 import useForm from '../../hooks/useForm';
 
 Modal.setAppElement('#root');
 
 const OrderPage = () => {
+
+
   const orderHandler = async (values) => {
     const result = await contractsService.createContract({
       objective: values.objective,
-      weightTons: Number(values.weightTons),
       distanceKM: Number(values.distanceKM),
       date: `From ${values.whenDateStart} untill ${values.whenDateEnd}`,
       whenDateStart: values.whenDateStart,
@@ -25,36 +26,12 @@ const OrderPage = () => {
       machines: '',
       status: 'pending',
     });
+    refreshState();
     closeModal();
 
     console.log(result);
   };
 
-  const dateFunc = (dateEnd) => {
-    let currentDate = new Date();
-    let cDay = currentDate.getDate();
-    let cYear = currentDate.getFullYear();
-    let cMonth = currentDate.getMonth();
-    if (dateEnd) {
-      cMonth = currentDate.getMonth() + 3;
-    } else {
-      cMonth = cMonth + 1;
-    }
-    if (cMonth > 12) {
-      cMonth = cMonth - 12;
-      cYear = cYear + 1;
-    }
-
-    if (cMonth < 10) {
-      cMonth = '0' + cMonth;
-    }
-    if (cDay < 10) {
-      cDay = '0' + cDay;
-    }
-
-    console.log('dates ' + cYear + '-' + cMonth + '-' + cDay);
-    return cYear + '-' + cMonth + '-' + cDay;
-  };
 
   const { values, onChange, onSubmit } = useForm(orderHandler, {
     objective: '',
@@ -68,9 +45,6 @@ const OrderPage = () => {
     contactInfo: '',
     duration: '',
     description: '',
-    // machines: '',
-    // status: '',
-    // choose date Format
   });
 
   const [isModalOpen, setModalOpen] = useState(false);
@@ -95,12 +69,6 @@ const OrderPage = () => {
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setOrders((prevOrders) => [...prevOrders, formData]);
-  //   closeModal();
-  // };
 
   return (
     <div className={styles.orderPage}>
@@ -263,10 +231,27 @@ const OrderPage = () => {
         </div>
       </Modal>
 
+      <h2 className={styles.pageHeader}>My current orders</h2>
       <div className={styles.orderContainer}>
-        {orders.map((order) => (
-          <OrderCard callback={refreshState} key={order._id} order={order} />
-        ))}
+        {orders.map((order) => {
+          if (order.status === 'reviewed') {
+            return;
+          }
+          return (
+            <OrderCard callback={refreshState} key={order._id} order={order} />
+          )
+        })}
+      </div>
+      <h2 className={styles.pageHeader}>Reviewed orders</h2>
+      <div className={styles.orderContainer} style={{fontSize:'0.8rem'}}>
+        {orders.map((order) => {
+          if (order.status !== 'reviewed') {
+            return;
+          }
+          return (
+            <OrderCard callback={refreshState} key={order._id} order={order} />
+          )
+        })}
       </div>
     </div>
   );

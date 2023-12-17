@@ -1,0 +1,37 @@
+.orderCard {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    text-wrap: wrap;
+    flex: 1 1 22%;
+    /* important */
+    padding: 1.5rem;
+    border: 0.3rem solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    gap: 0.5rem;
+    justify-content: space-between
+}
+
+.orderCard > p {
+    text-wrap: wrap;
+    overflow-wrap: break-word;
+    max-width: 20rem;
+}
+
+.actionButtons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 0.2rem;
+}
+
+
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+
+    .orderCard {
+        padding: 1rem;
+    }
+}

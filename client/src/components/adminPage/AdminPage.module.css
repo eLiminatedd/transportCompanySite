@@ -8,18 +8,22 @@
     flex-direction: row;
     /* Change to column layout on smaller screens */
     gap: 2rem;
+
 }
 
-.ordersContainer,
-.testimonialsContainer {
+.describe {
+    border-left: 0.3rem solid Orange;
+    padding-left: 0.5rem;
+
+}
+
+.ordersContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-top: 2rem;
 }
-
-/* Add more styles as needed */
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
@@ -32,9 +36,7 @@
         /* Change order to display form below description on smaller screens */
     }
 
-    .ordersContainer,
-    .testimonialsContainer {
+    .ordersContainer {
         margin-top: 1rem;
     }
 }
-
