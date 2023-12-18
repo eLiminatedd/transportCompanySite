@@ -53,7 +53,6 @@ const AdminPage = () => {
       });
   }, []);
 
-
   useEffect(() => {
     refreshState();
   }, [refreshState, orders, testimonials]);
@@ -70,6 +69,7 @@ const AdminPage = () => {
     attrSix: '',
     description: '',
   };
+
 
   return (
     <div className={styles.adminPage}>

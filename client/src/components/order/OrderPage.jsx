@@ -10,10 +10,10 @@ import Paginator from '../paginator/Paginator';
 Modal.setAppElement('#root');
 
 const OrderPage = () => {
+
   const orderHandler = async (values) => {
     const result = await contractsService.createContract({
       objective: values.objective,
-      weightTons: Number(values.weightTons),
       distanceKM: Number(values.distanceKM),
       date: `From ${values.whenDateStart} untill ${values.whenDateEnd}`,
       whenDateStart: values.whenDateStart,
