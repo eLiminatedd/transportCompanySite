@@ -3,15 +3,14 @@ import styles from './OrderCard.module.css';
 import * as contractsService from '../../services/contractsService.js';
 import * as testimonialsService from '../../services/testimonialsService.js';
 import Modal from 'react-modal';
-import ApproveOrderForm from '../approveOrderForm/ApproveOrderForm.jsx'
-import ReviewOrderForm from '../reviewForm/reviewForm.jsx'
+import ApproveOrderForm from '../approveOrderForm/ApproveOrderForm.jsx';
+import ReviewOrderForm from '../reviewForm/reviewForm.jsx';
 import AuthContext from '../../context/AuthContext';
 
 import { useState, useContext } from 'react';
 
 Modal.setAppElement('#root');
 
-// add orderCard module css for ordercard styles
 const OrderCard = ({ order, callback }) => {
   const { role } = useContext(AuthContext);
 
@@ -24,7 +23,6 @@ const OrderCard = ({ order, callback }) => {
   const closeReviewForm = () => setReviewFormOpen(false);
   // const {role} = useContext(AuthContext);
 
-
   const reviewHandler = (values) => {
     const testimonial = {
       name: order.contactInfo,
@@ -32,21 +30,25 @@ const OrderCard = ({ order, callback }) => {
       weightTons: order.weightTons,
       description: values.description,
       status: 'pending',
-      contract: order._id
-    }
-    testimonialsService.createTestimonial(testimonial)
-      .then(contractsService.editContract(order._id, {
-        status: 'reviewed',
-      })
-        .then(callback())
-        .then(closeReviewForm())
-        .catch((err) => {
-          console.log(err);
-        })
-      ).catch((err) => {
+      contract: order._id,
+    };
+    testimonialsService
+      .createTestimonial(testimonial)
+      .then(
+        contractsService
+          .editContract(order._id, {
+            status: 'reviewed',
+          })
+          .then(callback())
+          .then(closeReviewForm())
+          .catch((err) => {
+            console.log(err);
+          })
+      )
+      .catch((err) => {
         console.log(err);
       });
-  }
+  };
 
   const approveHandler = (values) => {
     contractsService
@@ -59,7 +61,6 @@ const OrderCard = ({ order, callback }) => {
       .catch((err) => {
         console.log(err);
       });
-    // MUST ADD SPINNER its working atleast in the admin page
   };
 
   const approve = () => {
@@ -67,16 +68,7 @@ const OrderCard = ({ order, callback }) => {
     //   return;
     // }
     console.log('from approved     >' + order._id);
-
     openMachineForm();
-    /*
-    Add modal with input field for machine
-    Open modal
-    add machine
-    send patch request
-    close modal
-    refresh state of orders
-    */
   };
 
   const complete = () => {
@@ -90,11 +82,6 @@ const OrderCard = ({ order, callback }) => {
       .catch((err) => {
         console.log(err);
       });
-
-    /*
-    send patch request to update status to complete
-    refresh state of orders
-    */
   };
 
   const deny = () => {
@@ -113,11 +100,6 @@ const OrderCard = ({ order, callback }) => {
       .catch((err) => {
         console.log(err);
       });
-
-    /*
-    send patch request to update status to denied
-    refresh state of orders
-    */
   };
 
   const del = () => {
@@ -133,33 +115,32 @@ const OrderCard = ({ order, callback }) => {
       .catch((err) => {
         console.log(err);
       });
-    /*
-    send delete request to delete order
-    refresh state of orders
-    */
   };
 
   const createTestimonial = () => {
-
     openReviewForm();
-
-    // open modal with form that has textarea for description
-
-
-
-  }
+  };
 
   const borderStyle = (status) => {
-    if (status === 'pending') return { borderColor: 'Orange' }
-    if (status === 'approved') return { borderColor: 'Blue' }
-    if (status === 'denied') return { borderColor: 'Red' }
-    if (status === 'complete') return { borderColor: 'Green' }
-    if (status === 'reviewed') return { borderColor: 'Black', backgroundColor: '#e5a8fd85' }
-  }
-
+    if (status === 'pending') {
+      return { borderColor: 'Orange' };
+    }
+    if (status === 'approved') {
+      return { borderColor: 'Blue' };
+    }
+    if (status === 'denied') {
+      return { borderColor: 'Red' };
+    }
+    if (status === 'complete') {
+      return { borderColor: 'Green' };
+    }
+    if (status === 'reviewed') {
+      return { borderColor: 'Black', backgroundColor: '#e5a8fd85' };
+    }
+  };
 
   return (
-    <div className={styles.orderCard} style={borderStyle(order.status)} >
+    <div className={styles.orderCard} style={borderStyle(order.status)}>
       <h3>{order.objective}</h3>
       <p>
         <strong>Weight:</strong> {order.weightTons}
@@ -199,46 +180,45 @@ const OrderCard = ({ order, callback }) => {
                 <button
                   style={{ backgroundColor: 'Blue' }}
                   disabled={order.status === 'approved' ? true : false}
-                  onClick={approve}>
+                  onClick={approve}
+                >
                   Approve
                 </button>
 
-                <button
-                  onClick={deny}
-                  style={{ backgroundColor: 'Red' }}>
+                <button onClick={deny} style={{ backgroundColor: 'Red' }}>
                   Deny
                 </button>
               </>
-            ): null}
+            ) : null}
 
-            <button
-              onClick={del}
-              style={{ backgroundColor: 'Red' }}>
+            <button onClick={del} style={{ backgroundColor: 'Red' }}>
               Delete
             </button>
           </>
-        ): null}
+        ) : null}
 
-        {order.status !== 'denied' & order.status !== 'reviewed' & order.status !== 'pending' & order.status !== 'complete' ? (
-
+        {(order.status !== 'denied') &
+        (order.status !== 'reviewed') &
+        (order.status !== 'pending') &
+        (order.status !== 'complete') ? (
           <button
             style={{ backgroundColor: 'Green' }}
             disabled={order.status !== 'approved'}
-            onClick={complete}>
+            onClick={complete}
+          >
             Complete
           </button>
-        ): null}
-
-
+        ) : null}
 
         {/* {role === 'User' & order.status === 'complete' ? ( */}
         {order.status === 'complete' ? (
-        <button
-          onClick={createTestimonial}
-          style={{ backgroundColor: 'Purple' }}>
-          Give Feedback
-        </button>
-        ): null}
+          <button
+            onClick={createTestimonial}
+            style={{ backgroundColor: 'Purple' }}
+          >
+            Give Feedback
+          </button>
+        ) : null}
       </div>
 
       <Modal
@@ -258,18 +238,8 @@ const OrderCard = ({ order, callback }) => {
       >
         <ReviewOrderForm callback={reviewHandler} />
       </Modal>
-    </div >
+    </div>
   );
 };
 
 export default OrderCard;
-
-/*
-TODO:
-- Add spinner in pending status
-
-- Add interaction buttons with conditional statements
-::::: - add auth context to get role
-      - make 2 groups of buttons for admin and user
-      - 
-*/

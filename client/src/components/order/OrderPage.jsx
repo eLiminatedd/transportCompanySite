@@ -5,11 +5,11 @@ import Modal from 'react-modal';
 import OrderCard from '../orderCard/OrderCard';
 import styles from './OrderPage.module.css';
 import useForm from '../../hooks/useForm';
+import Paginator from '../paginator/Paginator';
 
 Modal.setAppElement('#root');
 
 const OrderPage = () => {
-
 
   const orderHandler = async (values) => {
     const result = await contractsService.createContract({
@@ -32,7 +32,6 @@ const OrderPage = () => {
     console.log(result);
   };
 
-
   const { values, onChange, onSubmit } = useForm(orderHandler, {
     objective: '',
     weightTons: 0,
@@ -49,14 +48,35 @@ const OrderPage = () => {
 
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const [orders, setOrders] = useState([]);
+  const [currentOrders, setCurrentOrders] = useState([]);
+  const [reviewedOrders, setReviewedOrders] = useState([]);
+  const [currentPaginatedOrders, setCurrentPaginatedOrders] = useState([]);
+  const [reviewedPaginatedOrders, setReviewedPaginatedOrders] = useState([]);
+  const itemsPerPage = 3; // Set the number of items per page
+
+  const getCurrentOrders = useCallback(
+    (start, end) => {
+      setCurrentPaginatedOrders(currentOrders.slice(start, end));
+    },
+    [currentOrders]
+  );
+
+  const getReviewedOrders = useCallback(
+    (start, end) => {
+      setReviewedPaginatedOrders(reviewedOrders.slice(start, end));
+    },
+    [reviewedOrders]
+  );
 
   const refreshState = useCallback(() => {
     contractsService
       .getOwnContracts()
       .then((result) => {
+        const reviewed = result.filter((order) => order.status === 'reviewed');
+        const current = result.filter((order) => order.status !== 'reviewed');
         console.log(result);
-        setOrders(result);
+        setReviewedOrders(reviewed);
+        setCurrentOrders(current);
       })
       .catch((err) => {
         console.log(err);
@@ -65,7 +85,7 @@ const OrderPage = () => {
 
   useEffect(() => {
     refreshState();
-  }, [refreshState]);
+  }, [refreshState, currentOrders, reviewedOrders]);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
@@ -232,27 +252,44 @@ const OrderPage = () => {
       </Modal>
 
       <h2 className={styles.pageHeader}>My current orders</h2>
-      <div className={styles.orderContainer}>
-        {orders.map((order) => {
-          if (order.status === 'reviewed') {
-            return;
-          }
-          return (
-            <OrderCard callback={refreshState} key={order._id} order={order} />
-          )
-        })}
-      </div>
+
+      <Paginator
+        totalItems={currentOrders.length}
+        itemsPerPage={itemsPerPage}
+        callback={getCurrentOrders}
+      >
+        <div className={styles.orderContainer}>
+          {currentPaginatedOrders.map((order) => {
+            return (
+              <OrderCard
+                callback={refreshState}
+                key={order._id}
+                order={order}
+              />
+            );
+          })}
+        </div>
+      </Paginator>
+
       <h2 className={styles.pageHeader}>Reviewed orders</h2>
-      <div className={styles.orderContainer} style={{fontSize:'0.8rem'}}>
-        {orders.map((order) => {
-          if (order.status !== 'reviewed') {
-            return;
-          }
-          return (
-            <OrderCard callback={refreshState} key={order._id} order={order} />
-          )
-        })}
-      </div>
+
+      <Paginator
+        totalItems={reviewedOrders.length}
+        itemsPerPage={itemsPerPage}
+        callback={getReviewedOrders}
+      >
+        <div className={styles.orderContainer} style={{ fontSize: '0.8rem' }}>
+          {reviewedPaginatedOrders.map((order) => {
+            return (
+              <OrderCard
+                callback={refreshState}
+                key={order._id}
+                order={order}
+              />
+            );
+          })}
+        </div>
+      </Paginator>
     </div>
   );
 };

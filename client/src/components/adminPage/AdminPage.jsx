@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import * as contractsService from '../../services/contractsService';
 import * as testimonialsService from '../../services/testimonialsService';
-
+import Paginator from '../paginator/Paginator';
 import MachineForm from '../machineForm/MachineForm';
 import OrderCard from '../orderCard/OrderCard';
 import styles from './AdminPage.module.css';
@@ -12,18 +12,39 @@ const AdminPage = () => {
   const [orders, setOrders] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
 
+
+  const [currentOrders, setCurrentOrders] = useState([]);
+  const [currentTestimonials, setCurrentTestimonials] = useState([]);
+
+  const getCurrentOrders = useCallback(
+    (start, end) => {
+      setCurrentOrders(orders.slice(start, end));
+    },
+    [orders]
+  );
+
+  const getTestimonials = useCallback(
+    (start, end) => {
+      setCurrentTestimonials(testimonials.slice(start, end));
+    },
+    [testimonials]
+  );
+
+
   const refreshState = useCallback(() => {
     // change it to getCurrentContracts Later
     contractsService
       .getContracts()
       .then((result) => {
         console.log(result);
-        setOrders(result);
+        const fltrd = result.filter((order) => order.status !== 'reviewed');
+        setOrders(fltrd);
       })
       .then(testimonialsService.getTestimonials()
         .then((result) => {
           console.log(result);
-          setTestimonials(result)
+          const fltrd = result.filter((testimonial) => testimonial.status === 'pending');
+          setTestimonials(fltrd);
         })).catch((err) => {
           console.log(err);
         })
@@ -34,7 +55,7 @@ const AdminPage = () => {
 
   useEffect(() => {
     refreshState();
-  }, [refreshState]);
+  }, [refreshState, orders, testimonials]);
 
 
   const initData = {
@@ -68,40 +89,53 @@ const AdminPage = () => {
       {/* Orders Container */}
       <hr />
       <h2>Manage Orders</h2>
-      <div className={styles.ordersContainer}>
-        {orders.map((order) => {
-          if (order.status === 'reviewed') {
-            return;
-          }
+
+      <Paginator
+        totalItems={orders.length}
+        itemsPerPage={3}
+        callback={getCurrentOrders}
+      >
+        <div className={styles.ordersContainer}>
+        {currentOrders.map((order) => {
           return (
           <OrderCard
             callback={refreshState}
             key={order._id}
             order={order}
           />
-        )})}
+        );})}
       </div>
+      </Paginator>
+
+
+
+     
 
       <hr />
       {/* Testimonials Container */}
       <h2>Testimonials</h2>
+
+
+      <Paginator
+        totalItems={testimonials.length}
+        itemsPerPage={4}
+        callback={getTestimonials}
+      >
       <div className={styles.testimonialsContainer}>
         {/* Testimonial cards go here */}
 
-        {testimonials.map((testimonial) => {
-          if (testimonial.status !== 'pending') {
-            return;
-          }
+        {currentTestimonials.map((testimonial) => {
           return (
             <TestimonialCard
               callback={refreshState}
               key={testimonial._id}
               testimonial={testimonial}
             />
-          )
+          );
         })}
 
       </div>
+      </Paginator>
     </div>
   );
 };

@@ -38,7 +38,7 @@ const MachineDetails = () => {
 
   useEffect(() => {
     refreshState();
-  }, [machineId, refreshState]);
+  }, [machineDetails, refreshState]);
 
   if (!machineDetails) {
     return <p>Loading...</p>; // You can customize the loading indicator
@@ -87,7 +87,12 @@ const MachineDetails = () => {
         >
           <div className={styles.modalCont}>
             <div className={styles.formBox}>
-              <MachineForm id={machineId} modalHandler={closeModal} callback={refreshState} initData={machineDetails} />
+              <MachineForm
+                id={machineId}
+                modalHandler={closeModal}
+                callback={refreshState}
+                initData={machineDetails}
+              />
             </div>
             <button className={styles.closeButton} onClick={closeModal}>
               Close

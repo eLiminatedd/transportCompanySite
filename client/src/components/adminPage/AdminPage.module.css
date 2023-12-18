@@ -17,7 +17,8 @@
 
 }
 
-.ordersContainer {
+.ordersContainer,
+.testimonialsContainer  {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -36,7 +37,8 @@
         /* Change order to display form below description on smaller screens */
     }
 
-    .ordersContainer {
+    .ordersContainer,
+    .testimonialsContainer {
         margin-top: 1rem;
     }
 }
