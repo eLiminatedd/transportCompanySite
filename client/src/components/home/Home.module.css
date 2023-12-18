@@ -10,6 +10,9 @@
     text-align: center;
     text-shadow: 0.3rem 0.3rem 0.5rem #000000;
     font-weight: 900;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
 }
 
 .heroContent {
@@ -34,3 +37,28 @@
     background-color: #0000007a;
     border-radius: 3rem 1rem 3rem 1rem;
 }
+
+.testimonialSection{
+    font-size: 0.9rem;
+    color: rgb(255, 255, 255);
+    box-shadow: -1rem 0rem -10rem -4rem #0021F9;
+}
+
+.testimonialsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-content: center;
+
+}
+
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+
+    .testimonialsContainer {
+        margin-top: 1rem;
+    }
+}
+
+

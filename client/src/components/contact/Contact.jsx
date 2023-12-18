@@ -1,5 +1,5 @@
 import styles from './Contact.module.css';
-
+// Remove form No logic on server
 const Contact = () => {
   return (
     <div className={styles.contact}>

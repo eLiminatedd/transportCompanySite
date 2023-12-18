@@ -1,7 +1,6 @@
 import './App.css';
 import { AuthProvider } from './context/AuthContext';
 
-
 import Home from './components/home/Home';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
@@ -13,28 +12,32 @@ import Register from './components/register/Register';
 import OrderPage from './components/order/OrderPage';
 import AdminPage from './components/adminPage/AdminPage';
 import MachineDetails from './components/machineDetails/MachineDetails';
+import Spinner from './components/spinner/Spinner';
 
-
+import { Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <AuthProvider>
-    <div className="cont">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/equipment" element={<Equipment />} />
-        <Route path="/equipment/:machineId" element={<MachineDetails />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/orders" element={<OrderPage />} />
-        <Route path="/admin-panel" element={<AdminPage />} />
-      </Routes>
-      <Footer />
-    </div>
+      <div className="cont">
+        <Header />
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/equipment" element={<Equipment />} />
+            <Route path="/equipment/:machineId" element={<MachineDetails />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/orders" element={<OrderPage />} />
+            <Route path="/admin-panel" element={<AdminPage />} />
+            <Route path="/spinner" element={<Spinner />} />
+          </Routes>
+        </Suspense>
+        <Footer />
+      </div>
     </AuthProvider>
   );
 }
