@@ -6,6 +6,7 @@ import Modal from 'react-modal';
 import ApproveOrderForm from '../approveOrderForm/ApproveOrderForm.jsx';
 import ReviewOrderForm from '../reviewForm/reviewForm.jsx';
 import AuthContext from '../../context/AuthContext';
+import Spinner from '../spinner/Spinner';
 
 import { useState, useContext } from 'react';
 
@@ -141,7 +142,10 @@ const OrderCard = ({ order, callback }) => {
 
   return (
     <div className={styles.orderCard} style={borderStyle(order.status)}>
-      <h3>{order.objective}</h3>
+      <div className={styles.heading}>
+        <h3>{order.objective}</h3>
+        {order.status === 'pending' ? (<Spinner width='2rem' height='2rem' />) : null}
+      </div>
       <p>
         <strong>Weight:</strong> {order.weightTons}
       </p>
@@ -168,9 +172,9 @@ const OrderCard = ({ order, callback }) => {
           <strong>Assigned machine:</strong> {order.machines}
         </p>
       )}
-      <p>
+      {/* <p>
         <strong>Status:</strong> {order.status}
-      </p>
+      </p> */}
 
       <div className={styles.actionButtons}>
         {role === 'Admin' ? (

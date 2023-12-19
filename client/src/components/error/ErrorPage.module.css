@@ -1,0 +1,36 @@
+.errorPageContainer {
+    background-size: cover;
+    background-position: center;
+    background-image: url('https://www.liebherr.com/shared/media/construction-machinery/tower-cranes/images/mobile-construction-cranes/mk-campaign/liebherr-mk140-big-one.jpg');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    text-shadow: 0.3rem 0.3rem 0.5rem #000000;
+
+}
+
+.errorHeading {
+    color: #ff4500;
+    font-size: 5rem;
+    box-shadow: -1rem 0rem -10rem -4rem #e40f0f;
+    border-radius: 3rem 1rem 3rem 1rem;
+    background-color: #cc4b4bd3;
+    border: 0.5rem solid #181717;;
+    padding: 0 14rem;
+
+    /* Set the color to orange-red */
+}
+
+.errorMessage {
+    background-color: #ff6868b2;
+    border-radius: 3rem 1rem 3rem 1rem;
+    padding: 3rem 15rem;
+    border: 0.5rem solid #181717;;
+    color: #ff2019;
+    font-size: 3rem;
+    text-shadow: 0.5rem 0.8rem 0.6rem #000000;
+    /* Set the color to dark gray */
+}

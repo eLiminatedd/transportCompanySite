@@ -6,6 +6,7 @@ import OrderCard from '../orderCard/OrderCard';
 import styles from './OrderPage.module.css';
 import useForm from '../../hooks/useForm';
 import Paginator from '../paginator/Paginator';
+import Spinner from '../spinner/Spinner';
 
 Modal.setAppElement('#root');
 
@@ -26,7 +27,7 @@ const OrderPage = () => {
       machines: '',
       status: 'pending',
     });
-    refreshState();
+    refreshCurrentState();
     closeModal();
 
     console.log(result);
@@ -54,6 +55,25 @@ const OrderPage = () => {
   const [reviewedPaginatedOrders, setReviewedPaginatedOrders] = useState([]);
   const itemsPerPage = 3; // Set the number of items per page
 
+  const [isLoadingCurrentOrders, setLoadingCurrentOrders] = useState(false);
+  const [isLoadingReviewedOrders, setLoadingReviewedOrders] = useState(false);
+
+  useEffect(() => {
+    setLoadingCurrentOrders(false);
+  }, [currentOrders]);
+
+  useEffect(() => {
+    setLoadingReviewedOrders(false);
+  }, [reviewedOrders]);
+
+  useEffect(() => {
+    setLoadingCurrentOrders(false);
+  }, [currentPaginatedOrders]);
+
+  useEffect(() => {
+    setLoadingReviewedOrders(false);
+  }, [reviewedPaginatedOrders]);
+
   const getCurrentOrders = useCallback(
     (start, end) => {
       setCurrentPaginatedOrders(currentOrders.slice(start, end));
@@ -68,14 +88,29 @@ const OrderPage = () => {
     [reviewedOrders]
   );
 
-  const refreshState = useCallback(() => {
+  const refreshReviewedState = useCallback(() => {
+    setLoadingReviewedOrders(true);
     contractsService
       .getOwnContracts()
       .then((result) => {
         const reviewed = result.filter((order) => order.status === 'reviewed');
-        const current = result.filter((order) => order.status !== 'reviewed');
         console.log(result);
         setReviewedOrders(reviewed);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+
+
+  const refreshCurrentState = useCallback(() => {
+    setLoadingCurrentOrders(true);
+    contractsService
+      .getOwnContracts()
+      .then((result) => {
+        const current = result.filter((order) => order.status !== 'reviewed');
+        console.log(result);
         setCurrentOrders(current);
       })
       .catch((err) => {
@@ -83,9 +118,15 @@ const OrderPage = () => {
       });
   }, []);
 
+
+
   useEffect(() => {
-    refreshState();
-  }, [refreshState, currentOrders, reviewedOrders]);
+    refreshReviewedState();
+  }, [refreshReviewedState]);
+
+  useEffect(() => {
+    refreshCurrentState();
+  }, [refreshCurrentState]);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
@@ -258,17 +299,21 @@ const OrderPage = () => {
         itemsPerPage={itemsPerPage}
         callback={getCurrentOrders}
       >
-        <div className={styles.orderContainer}>
-          {currentPaginatedOrders.map((order) => {
-            return (
-              <OrderCard
-                callback={refreshState}
-                key={order._id}
-                order={order}
-              />
-            );
-          })}
-        </div>
+        {isLoadingCurrentOrders ? (
+          <Spinner />
+        ) : (
+          <div className={styles.orderContainer}>
+            {currentPaginatedOrders.map((order) => {
+              return (
+                <OrderCard
+                  callback={refreshCurrentState}
+                  key={order._id}
+                  order={order}
+                />
+              );
+            })}
+          </div>
+        )}
       </Paginator>
 
       <h2 className={styles.pageHeader}>Reviewed orders</h2>
@@ -278,17 +323,21 @@ const OrderPage = () => {
         itemsPerPage={itemsPerPage}
         callback={getReviewedOrders}
       >
-        <div className={styles.orderContainer} style={{ fontSize: '0.8rem' }}>
-          {reviewedPaginatedOrders.map((order) => {
-            return (
-              <OrderCard
-                callback={refreshState}
-                key={order._id}
-                order={order}
-              />
-            );
-          })}
-        </div>
+        {isLoadingReviewedOrders ? (
+          <Spinner />
+        ) : (
+          <div className={styles.orderContainer} style={{ fontSize: '0.8rem' }}>
+            {reviewedPaginatedOrders.map((order) => {
+              return (
+                <OrderCard
+                  callback={refreshReviewedState}
+                  key={order._id}
+                  order={order}
+                />
+              );
+            })}
+          </div>
+        )}
       </Paginator>
     </div>
   );

@@ -66,6 +66,13 @@
   font-size: 1.2rem;
 }
 
+.errorText {
+  background-color: red;
+  color: white;
+  border-radius: 10rem 30rem;
+  margin: 1rem auto;
+}
+
 /* Responsive Styles */
 
 @media (max-width: 768px) {
