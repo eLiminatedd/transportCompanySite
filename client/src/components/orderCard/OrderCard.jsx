@@ -142,10 +142,12 @@ const OrderCard = ({ order, callback }) => {
 
   return (
     <div className={styles.orderCard} style={borderStyle(order.status)}>
+
       <div className={styles.heading}>
         <h3>{order.objective}</h3>
         {order.status === 'pending' ? (<Spinner width='2rem' height='2rem' />) : null}
       </div>
+
       <p>
         <strong>Weight:</strong> {order.weightTons}
       </p>
@@ -246,4 +248,6 @@ const OrderCard = ({ order, callback }) => {
   );
 };
 
+
 export default OrderCard;
+

@@ -6,7 +6,9 @@ import OrderCard from '../orderCard/OrderCard';
 import styles from './OrderPage.module.css';
 import useForm from '../../hooks/useForm';
 import Paginator from '../paginator/Paginator';
+
 import Spinner from '../spinner/Spinner';
+
 
 Modal.setAppElement('#root');
 
@@ -55,6 +57,7 @@ const OrderPage = () => {
   const [reviewedPaginatedOrders, setReviewedPaginatedOrders] = useState([]);
   const itemsPerPage = 3; // Set the number of items per page
 
+
   const [isLoadingCurrentOrders, setLoadingCurrentOrders] = useState(false);
   const [isLoadingReviewedOrders, setLoadingReviewedOrders] = useState(false);
 
@@ -74,6 +77,7 @@ const OrderPage = () => {
     setLoadingReviewedOrders(false);
   }, [reviewedPaginatedOrders]);
 
+
   const getCurrentOrders = useCallback(
     (start, end) => {
       setCurrentPaginatedOrders(currentOrders.slice(start, end));
@@ -87,6 +91,7 @@ const OrderPage = () => {
     },
     [reviewedOrders]
   );
+
 
   const refreshReviewedState = useCallback(() => {
     setLoadingReviewedOrders(true);
@@ -104,13 +109,16 @@ const OrderPage = () => {
 
 
 
+
   const refreshCurrentState = useCallback(() => {
     setLoadingCurrentOrders(true);
     contractsService
       .getOwnContracts()
       .then((result) => {
+
         const current = result.filter((order) => order.status !== 'reviewed');
         console.log(result);
+
         setCurrentOrders(current);
       })
       .catch((err) => {
@@ -125,8 +133,10 @@ const OrderPage = () => {
   }, [refreshReviewedState]);
 
   useEffect(() => {
+
     refreshCurrentState();
   }, [refreshCurrentState]);
+
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
@@ -299,6 +309,7 @@ const OrderPage = () => {
         itemsPerPage={itemsPerPage}
         callback={getCurrentOrders}
       >
+
         {isLoadingCurrentOrders ? (
           <Spinner />
         ) : (
@@ -314,6 +325,7 @@ const OrderPage = () => {
             })}
           </div>
         )}
+
       </Paginator>
 
       <h2 className={styles.pageHeader}>Reviewed orders</h2>
@@ -323,6 +335,7 @@ const OrderPage = () => {
         itemsPerPage={itemsPerPage}
         callback={getReviewedOrders}
       >
+
         {isLoadingReviewedOrders ? (
           <Spinner />
         ) : (
@@ -338,6 +351,7 @@ const OrderPage = () => {
             })}
           </div>
         )}
+
       </Paginator>
     </div>
   );

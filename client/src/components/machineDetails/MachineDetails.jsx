@@ -40,7 +40,9 @@ const MachineDetails = () => {
 
   useEffect(() => {
     refreshState();
+
   }, [refreshState]);
+
 
   if (!machineDetails) {
     return <Spinner />;
@@ -68,6 +70,7 @@ const MachineDetails = () => {
               className={styles.machineImage}
             />
           </div>
+
           <div>
             <h2>{machineDetails.machineName}</h2>
             <p>{machineDetails.description}</p>
@@ -80,6 +83,7 @@ const MachineDetails = () => {
             <div>
               <button onClick={openModal}>Edit</button>
               <button onClick={handleDelete}>Delete</button>
+
             </div>
             {/* Add more details as needed */}
           </div>

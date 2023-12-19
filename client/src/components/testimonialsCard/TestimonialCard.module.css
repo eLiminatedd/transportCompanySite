@@ -1,4 +1,5 @@
 .testimonialCard {
+
   flex: 1 1 40%;
   display: flex;
   border: 0.2rem solid;
@@ -26,3 +27,4 @@
   object-fit: cover;
   border-radius: 50%;
 }
+

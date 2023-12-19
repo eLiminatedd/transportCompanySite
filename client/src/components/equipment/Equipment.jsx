@@ -1,16 +1,20 @@
 import { Link } from 'react-router-dom';
 import styles from './Equipment.module.css';
+
 import { useCallback, useEffect, useState } from 'react';
 import * as equipmentService from '../../services/equipmentService';
 import Paginator from '../paginator/Paginator';
 import Spinner from '../spinner/Spinner';
 
+
 const Equipment = () => {
   const [machines, setMachines] = useState([]);
   const [currentMachines, setCurrentMachines] = useState([]);
+
   const itemsPerPage = 4; 
   const totalItems = machines.length ? machines.length : 0; 
   const [isLoading, setLoading] = useState(true);
+
 
   const getCurrentItems = useCallback(
     (start, end) => {
@@ -26,7 +30,7 @@ const Equipment = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [machines]);
 
   useEffect(() => {
     setLoading(false);
@@ -51,11 +55,14 @@ const Equipment = () => {
   return (
     <div className={styles.machines}>
       <h2 className={styles.heading}>Equipment Information:</h2>
+
+
       <Paginator
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         callback={getCurrentItems}
       >
+
         {isLoading ? (
           <Spinner />
         ) : (
@@ -73,6 +80,7 @@ const Equipment = () => {
             ))}
           </div>
         )}
+
       </Paginator>
     </div>
   );

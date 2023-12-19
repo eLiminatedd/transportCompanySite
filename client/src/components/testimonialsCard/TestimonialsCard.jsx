@@ -5,7 +5,6 @@ import AuthContext from '../../context/AuthContext';
 import { useContext } from 'react';
 import Spinner from '../spinner/Spinner';
 
-
 const TestimonialCard = ({ testimonial, callback }) => {
   const { role } = useContext(AuthContext);
 
@@ -35,6 +34,7 @@ const TestimonialCard = ({ testimonial, callback }) => {
   return (
     <div className={styles.testimonialCard}>
       <div className={styles.testimonialImageContainer}>
+
         {testimonial.status === 'pending' ? (
           <Spinner width="3rem" height="3rem" />
         ) : (
@@ -53,6 +53,7 @@ const TestimonialCard = ({ testimonial, callback }) => {
         <p>
           Contract: {testimonial.objective} - {testimonial.weightTons}Tons{' '}
         </p>
+
       </div>
       {(role === 'Admin') & (testimonial.status === 'pending') ? (
         <div className={styles.actionBtns}>

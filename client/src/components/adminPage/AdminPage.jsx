@@ -31,6 +31,7 @@ const AdminPage = () => {
   );
 
   const refreshOrderState = useCallback(() => {
+
     // change it to getCurrentContracts Later
     setLoadingOrders(true);
     contractsService
@@ -50,6 +51,7 @@ const AdminPage = () => {
         result.filter((testimonial) => testimonial.status === 'pending')
       )
       .then((fltrdTestimonials) => setTestimonials(fltrdTestimonials))
+
       .catch((err) => {
         console.log(err);
       });
@@ -58,6 +60,7 @@ const AdminPage = () => {
   useEffect(() => {
     refreshOrderState();
   }, [refreshOrderState]);
+
 
   useEffect(() => {
     refreshTestimonialState();
@@ -129,6 +132,7 @@ const AdminPage = () => {
         )}
       </Paginator>
 
+
       <hr />
       {/* Testimonials Container */}
       <h2>Testimonials</h2>
@@ -153,6 +157,7 @@ const AdminPage = () => {
             })}
           </div>
         )}
+
       </Paginator>
     </div>
   );

@@ -10,9 +10,11 @@
     text-align: center;
     text-shadow: 0.3rem 0.3rem 0.5rem #000000;
     font-weight: 900;
+
     flex-direction: column;
     gap: 3rem;
     padding: 1rem 0;
+
 }
 
 .heroContent {
@@ -38,6 +40,7 @@
     border-radius: 3rem 1rem 3rem 1rem;
 }
 
+
 .testimonialSection {
     display: flex;
     flex-direction: column;
@@ -57,11 +60,13 @@
     font-size: 1.5rem;
     box-shadow: -1rem 0rem -10rem -4rem #e95f03;
 
+
 }
 
 .testimonialsContainer {
     display: flex;
     flex-direction: row;
+
     flex-wrap: wrap;
     gap: 2rem;
     align-content: center;
@@ -105,10 +110,13 @@
 }
 
 
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
 
     .testimonialsContainer {
         margin-top: 1rem;
     }
+
 }
+
