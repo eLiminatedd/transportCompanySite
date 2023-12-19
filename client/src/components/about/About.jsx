@@ -5,66 +5,90 @@ const About = () => {
     <div className={styles.about}>
       <h2 className={styles.heading}>About Us</h2>
       <p className={styles.content}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit
-        bibendum ante, id dignissim lectus malesuada vel. Proin aliquet arcu ut
-        mauris consectetur, vel fermentum arcu ultricies. Vestibulum ut mi et
-        lacus fermentum euismod. Duis vehicula elit eu justo semper, non aliquet
-        massa fermentum. Nulla facilisi.
+        Avtokran - Podem EOOD is the largest contractor of cargo-lifting and
+        transport services in the territory of the Dobrich region. The company
+        was founded in 1992. by Mr. Valentin Blagoev, who in just a few years,
+        turned it into a regional industry leader.
       </p>
       <div className={styles.team}>
         <div className={styles.member}>
-          <img src="team-member-1.jpg" alt="Team Member 1" />
-          <h3>John Doe</h3>
-          <p>Founder & CEO</p>
+          <p>
+            {' '}
+            Avtokran - Podem EOOD has a wide variety of lifting and transport
+            machines. Thanks to the wide range of cranes of different types,
+            load capacity and height, the company is able to offer a solution
+            for even the most complex construction and installation activities.
+          </p>
         </div>
         <div className={styles.member}>
-          <img src="team-member-2.jpg" alt="Team Member 2" />
-          <h3>Jane Smith</h3>
-          <p>Lead Developer</p>
+          <p>
+            With its carts and transport machines, the company completes the set
+            of services so that the customer can receive a fast, coordinated and
+            organized first-hand service with just one call.
+          </p>
         </div>
         {/* Add more team members as needed */}
       </div>
       <div className={styles.imageWithText}>
-        <img src="about-image.jpg" alt="About Image" />
+        <img
+          src="https://besthqwallpapers.com/Uploads/1-3-2022/191393/thumb2-grove-gmk5150xl-4k-all-terrain-crane-2022-cranes-construction-machinery.jpg"
+          alt="About Image"
+        />
         <div className={styles.imageWithTextText}>
-          <h3>Our Vision</h3>
+          <h3>
+            Among the many successful projects of the company, to name a few
+            that make an impression are:
+          </h3>
+          <p>♣ a number of hotels along the Bulgarian Black Sea coast</p>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Reprehenderit corrupti numquam magni, aspernatur magnam dolorum
-            sequi hic esse? Ab suscipit ut natus molestiae deserunt illum
-            pariatur temporibus maiores. Laborum asperiores ipsum, recusandae
-            molestiae nemo saepe id, et adipisci quam, doloremque doloribus
-            veniam accusamus suscipit sunt? Repudiandae vitae in eaque, dolorum
-            molestias excepturi ut minima molestiae ipsa illum, laboriosam fugit
-            id ex repellat laudantium consectetur ea delectus cum error est?
-            Adipisci delectus esse sapiente quibusdam ea laborum inventore
-            repudiandae necessitatibus quia, quas, veritatis ipsum nostrum nemo
-            dolor sint culpa fugit hic pariatur illo iure nisi quisquam
-            corporis. Quod, nam aperiam aspernatur magni possimus excepturi fuga
-            delectus dolorem ducimus nemo atque numquam maiores fugiat labore
-            dolorum ratione beatae et voluptates nulla quo quasi. Cupiditate
-            nemo magnam, maxime dolorum fugit eius saepe quod nihil neque vero
-            hic et necessitatibus rerum magni a minus incidunt suscipit officia
-            laboriosam ad reiciendis atque doloribus aperiam dicta! Tenetur, quo
-            repudiandae? Excepturi neque necessitatibus ut minima ipsa dicta
-            nemo molestiae deserunt, blanditiis ab minus expedita aperiam
-            laboriosam velit! Vitae quos, adipisci dolorum libero porro sit amet
-            at, neque laborum cumque, consequuntur corporis voluptas quam!
-            Ducimus provident esse temporibus dignissimos? Nemo ipsam alias
-            aperiam consectetur voluptate voluptas et illo animi, officia
-            laboriosam dolor repudiandae ipsa, dicta eum molestias? Tempora
-            accusantium, dolorum reiciendis tempore impedit harum asperiores,
-            deleniti ducimus fuga laborum magnam maxime, ab dolor esse nam fugit
-            cum earum ipsam labore! Veniam distinctio dolorem, quod nihil
-            quibusdam quia, quisquam eum, consequatur rerum maiores voluptatibus
-            reiciendis. Ea libero aliquid ab commodi quasi, eos, vitae itaque
-            possimus quis, dolorem vel praesentium. Itaque libero quas
-            consequuntur repellat voluptates molestias doloremque quam? Debitis
-            at molestias dolorem, veritatis quas assumenda, culpa quod, quia
-            aperiam esse distinctio veniam eaque facilis? Totam officiis error
-            sunt ipsa veniam magni nesciunt vitae odit, laboriosam impedit
-            perspiciatis odio est!
+            ♣ loading and unloading activities in the Black Sea ports, incl. the
+            port of Constanta
           </p>
+          <p>♣ Launching and pulling out of the sea, of boats and yachts</p>
+          <p>♣ routes of gas transmission networks</p>
+          <p>♣ routes of poles of power transmission networks</p>
+          <p>♣ construction of pedestals for wind turbine blades</p>
+          <p>♣ installation and dismantling of metal structures</p>
+          <p>♣ installation of air conditioning equipment</p>
+          <p>♣ installation and dismantling of silos/grain warehouses</p>
+          <p>
+            ♣ construction of antennas and facilities of the Bulgarian mobile
+            operators
+          </p>
+          <p>
+            ♣ lifting activities in the construction of residential and public
+            buildings.
+          </p>
+        </div>
+      </div>
+      <div className={styles.imageWithText}>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtIlY4XdBiikIYFOKwZwdBcXqghkCvUTM_kA&usqp=CAU"
+          alt="About Image"
+        />
+        <div className={styles.imageWithTextText}>
+          <h3>Long-term partners of Avtokran – Podem Ltd. include:</h3>
+          <p>♠♦♣ Megatron Service EAD - Sofia</p>
+          <p>♠♦♣ Farmer-2000 AD – Stara Zagora</p>
+          <p>♠♦♣ Venera OOD - Dobrich</p>
+          <p>♠♦♣ Ustrem 92 STF - Dobrich</p>
+          <p>♠♦♣ Citytrade-D EOOD – Dobrich</p>
+          <p>♠♦♣ Dil Tour AD - Plovdiv</p>
+          <p>♠♦♣ Rimex Engineering AD - Sofia</p>
+          <p>♠♦♣ Izotech OOD - Sofia</p>
+          <p>♠♦♣ Orehite OOD - Plovdiv</p>
+          <p>♠♦♣ ET Ivan Ivanov-Eko – Balchik</p>
+          <p>♠♦♣ SD Sudrujie Stoychevi - 5765 - Dobrich.</p>
+          <p>♠♦♣ Dobrev EOOD - Dobrich</p>
+          <p>♠♦♣ Monolith Ltd</p>
+          <p>♠♦♣ Komplektstroy-D OOD – Dobrich</p>
+          <p>♠♦♣ Metalagro AD – Dobrich</p>
+          <p>♠♦♣ Vantotrade Auto AD - Sofia</p>
+          <p>♠♦♣ Dobrudzha Building Ltd. – Dobrich</p>
+          <p>♠♦♣ Ustrem - 92 STF - Dobrich</p>
+          <p>♠♦♣ ET Nedyalko Statev - Dobrich</p>
+          <p>♠♦♣ A1 EAD - Sofia</p>
+          <p>♠♦♣ Vivacom EAD - Sofia</p>
         </div>
       </div>
     </div>

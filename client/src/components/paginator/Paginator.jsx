@@ -7,19 +7,14 @@ const Paginator = ({ totalItems, itemsPerPage, callback, children }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-  const handlePageChange = (currentPage) => {
-    const itemOffset = (currentPage - 1) * itemsPerPage;
-    const endOffset = itemOffset + itemsPerPage;
-    // basically callback recieves start and end points for slicing and changes children state
-    callback(itemOffset, endOffset);
-  };
 
-
+    const handlePageChange = (currentPage) => {
+      const itemOffset = (currentPage - 1) * itemsPerPage;
+      const endOffset = itemOffset + itemsPerPage;
+      callback(itemOffset, endOffset);
+    };
     handlePageChange(currentPage);
-
-
-  }, [currentPage, itemsPerPage, callback ]);
-
+  }, [currentPage, itemsPerPage, callback]);
 
 
   const handlePageClick = (page) => {
@@ -32,8 +27,15 @@ const Paginator = ({ totalItems, itemsPerPage, callback, children }) => {
 
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(
-        <li key={i} >
-          <button className={currentPage === i ? styles.active : styles.btns} onClick={() => handlePageClick(i)}>{i}</button>
+
+        <li key={i}>
+          <button
+            className={currentPage === i ? styles.active : styles.btns}
+            onClick={() => handlePageClick(i)}
+          >
+            {i}
+          </button>
+
         </li>
       );
     }
@@ -44,10 +46,12 @@ const Paginator = ({ totalItems, itemsPerPage, callback, children }) => {
   return (
     // render props children and get cards inside from parrent
     <>
-    {children}
-    <div className={styles.paginationContainer}>
-      <ul className={styles.pagination}>{renderPageNumbers()}</ul>
-    </div>
+
+      {children}
+      <div className={styles.paginationContainer}>
+        <ul className={styles.pagination}>{renderPageNumbers()}</ul>
+      </div>
+
     </>
   );
 };

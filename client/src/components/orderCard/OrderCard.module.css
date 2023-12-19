@@ -26,6 +26,11 @@
     gap: 0.2rem;
 }
 
+.heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
 
 /* Mobile responsiveness */

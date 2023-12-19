@@ -12,7 +12,9 @@ export default function Header() {
     return (
         <header className={styles.header}>
         <nav className={styles.navbar}>
-          <div className={styles.logo}>Logo</div>
+          <div >
+            <img className={styles.logo} src="https://www.avtokranpodem.com/cwsd.php?Z3AuPTQ0Pw/NDc/aGp0YClgNzA7NDEgPzo8NiYiOC1_YHE.png" alt="" />
+          </div>
           <div className={styles.navList}>
             <Link to="/" className={styles.navItem}>Home</Link>
             <Link to="/about" className={styles.navItem}>About</Link>

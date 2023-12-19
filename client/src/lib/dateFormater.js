@@ -24,4 +24,4 @@ const dateFunc = (dateEnd) => {
     return cYear + '-' + cMonth + '-' + cDay;
   };
 
-  export default dateFunc
+  export default dateFunc;

@@ -3,6 +3,7 @@ import styles from './TestimonialCard.module.css';
 import * as testimonialsService from '../../services/testimonialsService';
 import AuthContext from '../../context/AuthContext';
 import { useContext } from 'react';
+import Spinner from '../spinner/Spinner';
 
 const TestimonialCard = ({ testimonial, callback }) => {
   const { role } = useContext(AuthContext);
@@ -33,14 +34,26 @@ const TestimonialCard = ({ testimonial, callback }) => {
   return (
     <div className={styles.testimonialCard}>
       <div className={styles.testimonialImageContainer}>
-        <img src={'https://cdn.pixabay.com/photo/2016/03/31/20/37/client-1295901_1280.png'} alt={'testimonialImage'} className={styles.testimonialImage} />
+
+        {testimonial.status === 'pending' ? (
+          <Spinner width="3rem" height="3rem" />
+        ) : (
+          <img
+            src={
+              'https://cdn.pixabay.com/photo/2016/03/31/20/37/client-1295901_1280.png'
+            }
+            alt={'testimonialImage'}
+            className={styles.testimonialImage}
+          />
+        )}
       </div>
       <div>
-      <h2>{testimonial.description}</h2>
-      <p>- {testimonial.name}</p>
-      <p>
-        Contract: {testimonial.objective} - {testimonial.weightTons}Tons{' '}
-      </p>
+        <h2>{testimonial.description}</h2>
+        <p>- {testimonial.name}</p>
+        <p>
+          Contract: {testimonial.objective} - {testimonial.weightTons}Tons{' '}
+        </p>
+
       </div>
       {(role === 'Admin') & (testimonial.status === 'pending') ? (
         <div className={styles.actionBtns}>

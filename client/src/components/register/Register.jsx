@@ -1,14 +1,22 @@
 import styles from './Register.module.css';
 
-
-import { useContext} from 'react';
+import ValidationContext from '../../context/ValidationContext';
+import { useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
 import useForm from '../../hooks/useForm';
 
 const Register = () => {
-  const {registerSubmitHandler} = useContext(AuthContext);
-  const {values, onChange, onSubmit} = useForm(registerSubmitHandler, {
-
+  const { registerSubmitHandler } = useContext(AuthContext);
+  const {
+    emailValidator,
+    phoneValidator,
+    confPasswordValidator,
+    usernameValidator,
+    nameValidator,
+    passwordValidator,
+    vldErrors,
+  } = useContext(ValidationContext);
+  const { values, onChange, onSubmit } = useForm(registerSubmitHandler, {
     username: '',
     email: '',
     password: '',
@@ -26,7 +34,6 @@ const Register = () => {
       <h2 className={styles.heading}>Register</h2>
       <div className={styles.formContainer}>
         <form onSubmit={onSubmit} className={styles.registerForm}>
-
           <div className="twofieldsbox">
             <div className={styles.formGroup}>
               <label htmlFor="username">Username</label>
@@ -36,11 +43,12 @@ const Register = () => {
                 name="username"
                 value={values.username}
                 onChange={onChange}
-
+                onBlur={usernameValidator}
                 autoComplete="Username"
                 required
               />
             </div>
+              <p className={styles.errorText}>{vldErrors.username}</p>
             <div className={styles.formGroup}>
               <label htmlFor="email">Email</label>
               <input
@@ -48,12 +56,13 @@ const Register = () => {
                 id="email"
                 name="email"
                 value={values.email}
+                onBlur={emailValidator}
                 onChange={onChange}
-
                 autoComplete="email"
                 required
               />
             </div>
+            <p className={styles.errorText}>{vldErrors.email}</p>
           </div>
 
           <div className="twofieldsbox">
@@ -65,11 +74,12 @@ const Register = () => {
                 name="password"
                 value={values.password}
                 onChange={onChange}
-
+                onBlur={passwordValidator}
                 autoComplete="new-password"
                 required
               />
             </div>
+            <p className={styles.errorText}>{vldErrors.password}</p>
             <div className={styles.formGroup}>
               <label htmlFor="confirmPassword">Confirm Password</label>
               <input
@@ -78,11 +88,12 @@ const Register = () => {
                 name="confirmPassword"
                 value={values.confirmPassword}
                 onChange={onChange}
-
+                onBlur={confPasswordValidator}
                 autoComplete="new-password"
                 required
               />
             </div>
+            <p className={styles.errorText}>{vldErrors.confirmPassword}</p>
           </div>
 
           <div className="twofieldsbox">
@@ -92,13 +103,14 @@ const Register = () => {
                 type="tel"
                 id="phone"
                 name="phone"
-                // pattern="[0-9]{10}" 
                 value={values.phone}
                 onChange={onChange}
-
+                onBlur={phoneValidator}
                 autoComplete="tel"
               />
             </div>
+            <p className={styles.errorText}>{vldErrors.phone}</p>
+
             <div className={styles.formGroup}>
               <label htmlFor="companyName">Company Name</label>
               <input
@@ -107,10 +119,11 @@ const Register = () => {
                 name="companyName"
                 value={values.companyName}
                 onChange={onChange}
-
+                onBlur={nameValidator}
                 autoComplete="organization"
               />
             </div>
+            <p className={styles.errorText}>{'Company ' + vldErrors.name}</p>
           </div>
 
           <div className="twofieldsbox">
@@ -122,10 +135,12 @@ const Register = () => {
                 name="firstName"
                 value={values.firstName}
                 onChange={onChange}
-
+                onBlur={nameValidator}
                 autoComplete="given-name"
               />
             </div>
+            <p className={styles.errorText}>{'First ' + vldErrors.name}</p>
+
             <div className={styles.formGroup}>
               <label htmlFor="lastName">Last Name</label>
               <input
@@ -134,14 +149,15 @@ const Register = () => {
                 name="lastName"
                 value={values.lastName}
                 onChange={onChange}
-
+                onBlur={nameValidator}
                 autoComplete="family-name"
               />
             </div>
+            <p className={styles.errorText}>{'Last ' + vldErrors.name}</p>
           </div>
           <br />
           <div className={styles.buttonContainer}>
-            <button type="submit" className={styles.buttonRegister}>
+            <button style={{backgroundColor: vldErrors ? 'Gray' : ''}} type="submit" className={styles.buttonRegister}>
               Register
             </button>
           </div>

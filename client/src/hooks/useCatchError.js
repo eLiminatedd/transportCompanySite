@@ -1,4 +1,5 @@
 import { useState } from 'react';
+// import ErrorPage from '../components/error/ErrorPage.jsx';
 
 
 export default function useCatchError(defaultValue) {
@@ -8,6 +9,7 @@ export default function useCatchError(defaultValue) {
         setState(error);
 
     };
+
 
     return [
         state,
