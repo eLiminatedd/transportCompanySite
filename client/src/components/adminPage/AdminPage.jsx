@@ -83,6 +83,7 @@ const AdminPage = () => {
     description: '',
   };
 
+
   return (
     <div className={styles.adminPage}>
       <div className={styles.pageContainer}>
